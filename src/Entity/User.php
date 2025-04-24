@@ -39,4 +39,58 @@ class User extends BaseUser implements BaseUserInterface
         parent::__construct();
         $this->keys = new ArrayCollection();
     }
+
+    /**
+     * @return Collection<int, UserKey>
+     */
+    public function getKeys(): Collection
+    {
+        return $this->keys;
+    }
+
+    public function addKey(UserKey $key): static
+    {
+        if (!$this->keys->contains($key)) {
+            $this->keys->add($key);
+            $key->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeKey(UserKey $key): static
+    {
+        if ($this->keys->removeElement($key)) {
+            // set the owning side to null (unless already changed)
+            if ($key->getUser() === $this) {
+                $key->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getCompany(): ?Company
+    {
+        return $this->company;
+    }
+
+    public function setCompany(?Company $company): static
+    {
+        $this->company = $company;
+
+        return $this;
+    }
+
+    public function getProfile(): ?Profile
+    {
+        return $this->profile;
+    }
+
+    public function setProfile(?Profile $profile): static
+    {
+        $this->profile = $profile;
+
+        return $this;
+    }
 }
