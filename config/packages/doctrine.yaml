@@ -16,6 +16,9 @@ doctrine:
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        resolve_target_entity_classes:
+            dsarhoya\BaseBundle\Model\EntityMappers\BaseUserInterface: App\Entity\User
+            dsarhoya\BaseBundle\Model\EntityMappers\BaseProfileInterface: App\Entity\Profile
 
 when@test:
     doctrine:
