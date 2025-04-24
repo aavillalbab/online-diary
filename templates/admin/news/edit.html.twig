@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Editar noticia | Administración{% endblock %}
+
+{% block body %}
+    <h1>Editar noticia</h1>
+    {{ include('admin/news/_form.html.twig', {'button_label': 'Actualizar'}) }}
+    <a href="{{ path('admin_news_index') }}" class="btn btn-link mt-3">Volver a la lista</a>
+{% endblock %}

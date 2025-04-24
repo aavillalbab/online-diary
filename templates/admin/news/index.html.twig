@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Noticias | Administración{% endblock %}
+
+{% block body %}
+    <h1>Noticias</h1>
+
+    <a href="{{ path('admin_news_new') }}" class="btn btn-success mb-3">Crear noticia</a>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Título</th>
+                <th>Categoría</th>
+                <th>Publicado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for news in news_list %}
+                <tr>
+                    <td>{{ news.id }}</td>
+                    <td>{{ news.title }}</td>
+                    <td>{{ news.category.name }}</td>
+                    <td>{{ news.publishedAt ? news.publishedAt|date('d/m/Y H:i') : '' }}</td>
+                    <td>
+                        <a href="{{ path('admin_news_edit', {'id': news.id}) }}" class="btn btn-primary btn-sm">Editar</a>
+                        <form method="post" action="{{ path('admin_news_delete', {'id': news.id}) }}" style="display:inline-block" onsubmit="return confirm('¿Seguro que quieres eliminar esta noticia?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ news.id) }}">
+                            <button class="btn btn-danger btn-sm">Borrar</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5">No hay noticias.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
