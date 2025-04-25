@@ -1,5 +1,5 @@
 home:
-  path: /login
+  path: /home
   defaults: { _controller: dsarhoya\BaseBundle\Controller\V2\Pub\SecurityController::login }
 
 base_bundle_pub:
