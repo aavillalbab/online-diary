@@ -2,16 +2,14 @@
 
 namespace App\Entity;
 
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\News;
 
 /**
- * Category
- *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="App\Repository\CategoryRepository")
+ * @ORM\Table
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
 class Category
 {
@@ -20,7 +18,7 @@ class Category
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private int $id;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -33,9 +31,9 @@ class Category
     private ?string $slug;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\News", mappedBy="category", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=News::class, mappedBy="category")
      */
-    private ArrayCollection $news;
+    private Collection $news;
 
     public function __construct()
     {
@@ -47,6 +45,12 @@ class Category
         return $this->id;
     }
 
+    public function setId(int $id): static
+    {
+        $this->id = $id;
+        return $this;
+    }
+
     public function getName(): ?string
     {
         return $this->name;
@@ -55,7 +59,6 @@ class Category
     public function setName(string $name): static
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -67,7 +70,6 @@ class Category
     public function setSlug(string $slug): static
     {
         $this->slug = $slug;
-
         return $this;
     }
 
@@ -82,7 +84,7 @@ class Category
     public function addNews(News $news): static
     {
         if (!$this->news->contains($news)) {
-            $this->news->add($news);
+            $this->news[] = $news;
             $news->setCategory($this);
         }
 

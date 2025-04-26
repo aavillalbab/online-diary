@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello DefaultController!{% endblock %}
+{% block title %}Dashboard{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,16 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>{{ controller_name }} 📰</h1>
 
-    This friendly message is coming from:
     <ul>
-        <li>Your controller at <code><a href="{{ '/Users/aavillalbab/Code/personal/GarageLabs/online-diary/src/Controller/DefaultController.php'|file_link(0) }}">src/Controller/DefaultController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/Users/aavillalbab/Code/personal/GarageLabs/online-diary/templates/default/index.html.twig'|file_link(0) }}">templates/default/index.html.twig</a></code></li>
+        <li>
+            <a href="{{ path('news') }}"><h2>Noticias</h2></a>
+        </li>
+
+        <li>
+            <a href="{{ path('categories') }}"><h2>Categorías</h2></a>
+        </li>
     </ul>
 </div>
 {% endblock %}
