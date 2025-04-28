@@ -6,6 +6,7 @@ use App\Repository\NewsRepository;
 
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Table
@@ -17,16 +18,22 @@ class News
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @JMS\SerializedName("id")
+     * @JMS\Groups({"news_list"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @JMS\SerializedName("title")
+     * @JMS\Groups({"news_list"})
      */
     private ?string $title;
 
     /**
      * @ORM\Column(type="text")
+     * @JMS\SerializedName("description")
+     * @JMS\Groups({"news_list"})
      */
     private ?string $description;
 
@@ -37,13 +44,16 @@ class News
 
     /**
      * @ORM\Column(type="boolean")
+     * @JMS\SerializedName("isActive")
      */
     private ?bool $isActive = false;
 
     /**
      * @ORM\Column(type="datetime")
+     * @JMS\SerializedName("publishedAt")
+     * @JMS\Groups({"news_list"})
      */
-    private ?\DateTimeInterface $publishedAt;
+    private ?DateTimeInterface $publishedAt;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
@@ -53,10 +63,10 @@ class News
     /**
      * @ORM\ManyToOne(targetEntity=Category::class, inversedBy="news")
      * @ORM\JoinColumn(nullable=false)
+     * @JMS\SerializedName("category")
+     * @JMS\Groups({"r_news_category"})
      */
     private ?Category $category;
-
-    // Getters y Setters igual que los tuyos:
 
     public function getId(): ?int
     {

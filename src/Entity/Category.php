@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use JMS\Serializer\Annotation as JMS;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,16 +18,22 @@ class Category
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
+     * @JMS\SerializedName("id")
+     * @JMS\Groups({"category_list"})
      */
     private int $id;
 
     /**
      * @ORM\Column(type="string", length=100)
+     * @JMS\SerializedName("name")
+     * @JMS\Groups({"category_list"})
      */
     private string $name;
 
     /**
      * @ORM\Column(type="string", length=100, unique=true)
+     * @JMS\SerializedName("slug")
+     * @JMS\Groups({"category_list"})
      */
     private ?string $slug;
 
@@ -93,11 +100,8 @@ class Category
 
     public function removeNews(News $news): static
     {
-        if ($this->news->removeElement($news)) {
-            // set the owning side to null (unless already changed)
-            if ($news->getCategory() === $this) {
-                $news->setCategory(null);
-            }
+        if ($this->news->removeElement($news) && $news->getCategory() === $this) {
+            $news->setCategory(null);
         }
 
         return $this;

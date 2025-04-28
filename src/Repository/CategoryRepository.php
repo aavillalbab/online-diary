@@ -20,4 +20,19 @@ class CategoryRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Category::class);
     }
+
+    public function searchCategories(?string $name, int $limit, int $offset): array
+    {
+        $qb = $this->createQueryBuilder('c');
+
+        if ($name) {
+            $qb->andWhere('c.name LIKE :name')
+                ->setParameter('name', '%' . $name . '%');
+        }
+
+        return $qb->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+            ->getResult();
+    }
 }
