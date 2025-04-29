@@ -1,6 +1,8 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+admin:
+  resource: '../src/Controller/Admin'
+  type: annotation
+  prefix: /admin
+
 api:
   resource: '../src/Controller/Api'
   type: annotation
