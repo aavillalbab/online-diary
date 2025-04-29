@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ae3a8e3c366b778799694880d981417c",
+    "content-hash": "8bf31e3c84ebd6531962f131438a2109",
     "packages": [
         {
             "name": "aws/aws-crt-php",
@@ -1632,6 +1632,42 @@
                 "source": "https://bitbucket.org/dsarhoya/base-bundle/src/92ac216292c3773a2396867fd30457ced0b1f3c1/?at=5.0.5"
             },
             "time": "2023-12-05T13:53:44+00:00"
+        },
+        {
+            "name": "dsarhoya/dsy-files-bundle",
+            "version": "5.0.1",
+            "target-dir": "dsarhoya/DSYFilesBundle",
+            "source": {
+                "type": "git",
+                "url": "https://bitbucket.org/dsarhoya/dsy-files-bundle.git",
+                "reference": "a66d0c87ca567945be75919941bbc55fd5d69e2f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://bitbucket.org/dsarhoya/dsy-files-bundle/get/a66d0c87ca567945be75919941bbc55fd5d69e2f.zip",
+                "reference": "a66d0c87ca567945be75919941bbc55fd5d69e2f",
+                "shasum": ""
+            },
+            "require": {
+                "aws/aws-sdk-php": "^3.3.0"
+            },
+            "require-dev": {
+                "doctrine/orm": "^2.4 || ^2.5",
+                "symfony/symfony": "^2.8 || ^3.4"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "dsarhoya\\DSYFilesBundle": ""
+                }
+            },
+            "description": "Bundle with files upload/download functions",
+            "homepage": "https://bitbucket.org/dsarhoya/dsy-files-bundle",
+            "support": {
+                "source": "https://bitbucket.org/dsarhoya/dsy-files-bundle/src/a66d0c87ca567945be75919941bbc55fd5d69e2f/?at=5.0.1",
+                "issues": "https://bitbucket.org/dsarhoya/dsy-files-bundle/issues"
+            },
+            "time": "2025-02-12T21:24:33+00:00"
         },
         {
             "name": "egulias/email-validator",
@@ -9048,16 +9084,16 @@
     "packages-dev": [
         {
             "name": "myclabs/deep-copy",
-            "version": "1.13.0",
+            "version": "1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "024473a478be9df5fdaca2c793f2232fe788e414"
+                "reference": "1720ddd719e16cf0db4eb1c6eca108031636d46c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/024473a478be9df5fdaca2c793f2232fe788e414",
-                "reference": "024473a478be9df5fdaca2c793f2232fe788e414",
+                "url": "https://api.github.com/repos/myclabs/DeepCopy/zipball/1720ddd719e16cf0db4eb1c6eca108031636d46c",
+                "reference": "1720ddd719e16cf0db4eb1c6eca108031636d46c",
                 "shasum": ""
             },
             "require": {
@@ -9096,7 +9132,7 @@
             ],
             "support": {
                 "issues": "https://github.com/myclabs/DeepCopy/issues",
-                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.0"
+                "source": "https://github.com/myclabs/DeepCopy/tree/1.13.1"
             },
             "funding": [
                 {
@@ -9104,7 +9140,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-02-12T12:17:51+00:00"
+            "time": "2025-04-29T12:36:36+00:00"
         },
         {
             "name": "nikic/php-parser",

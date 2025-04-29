@@ -13,4 +13,5 @@ return [
     Symfony\Bundle\MakerBundle\MakerBundle::class => ['dev' => true],
     dsarhoya\BaseBundle\dsarhoyaBaseBundle::class => ['all' => true],
     JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
+    dsarhoya\DSYFilesBundle\dsarhoyaDSYFilesBundle::class => ['all' => true],
 ];

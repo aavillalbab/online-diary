@@ -38,6 +38,9 @@
             "migrations/.gitignore"
         ]
     },
+    "dsarhoya/dsy-files-bundle": {
+        "version": "dev-master"
+    },
     "jms/serializer-bundle": {
         "version": "5.5",
         "recipe": {
