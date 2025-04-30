@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% import 'fragments/news_image.html.twig' as newsImage %}
+
+{% block title %}Inicio - Diario Online{% endblock %}
+
+{% block body %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <h1 class="display-4">Últimas Noticias</h1>
+        </div>
+    </div>
+
+    {# Debug information #}
+    {% if app.debug %}
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="alert alert-info">
+                    <h5>Debug Information</h5>
+                    <p>Total news items: {{ latest_news|length }}</p>
+                    {% for news in latest_news %}
+                        <p>News ID: {{ news.id }}, Title: {{ news.title }}, Published: {{ news.publishedAt|date('Y-m-d H:i:s') }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        {% for news in latest_news %}
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card h-100">
+                    {{ newsImage.newsImage(news, 'card-img-top', 'height: 200px; object-fit: cover;') }}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ news.title }}</h5>
+                        <p class="card-text">{{ news.description|slice(0, 150) }}...</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <small class="text-muted">{{ news.publishedAt|date('d/m/Y') }}</small>
+                            <a href="{{ path('news_show', {'slug': news.title|lower|replace({' ': '-'})}) }}" class="btn btn-primary">Leer más</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <div class="alert alert-info">
+                    No hay noticias disponibles en este momento.
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %} 

@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/category', name: 'admin_category_')]
+#[Route('/categoria', name: 'admin_category_')]
 class CategoryAdminController extends AbstractController
 {
     public function __construct(

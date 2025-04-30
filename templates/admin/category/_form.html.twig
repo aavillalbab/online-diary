@@ -1,4 +1,13 @@
 {{ form_start(form) }}
+    <div class="mb-3">
+        {{ form_label(form.name) }}
+        {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.name) }}
+    </div>
+    <div class="mb-3">
+        {{ form_label(form.slug) }}
+        {{ form_widget(form.slug, {'attr': {'class': 'form-control'}}) }}
+        {{ form_errors(form.slug) }}
+    </div>
 {{ form_widget(form) }}
-<button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
 {{ form_end(form) }}

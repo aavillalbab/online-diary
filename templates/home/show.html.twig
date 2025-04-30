@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+{% import 'fragments/news_image.html.twig' as newsImage %}
+
+{% block title %}{{ news.title }} - Diario Online{% endblock %}
+
+{% block body %}
+    <div class="row mb-4">
+        <div class="col-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{{ path('public_home') }}">Inicio</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ news.title }}</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <article class="news-detail">
+        <header class="mb-4">
+            <h1 class="display-4">{{ news.title }}</h1>
+            <div class="text-muted mb-3">
+                <small>Publicado el {{ news.publishedAt|date('d/m/Y') }}</small>
+                {% if news.category %}
+                    <span class="mx-2">|</span>
+                    <a href="{{ path('category_show', {'slug': news.category.slug}) }}" class="text-decoration-none">
+                        {{ news.category.name }}
+                    </a>
+                {% endif %}
+            </div>
+        </header>
+
+        <div class="mb-4">
+            {{ newsImage.newsImage(news) }}
+        </div>
+
+        <div class="news-content">
+            {{ news.description|raw }}
+        </div>
+    </article>
+{% endblock %} 

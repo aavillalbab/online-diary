@@ -14,4 +14,6 @@ return [
     dsarhoya\BaseBundle\dsarhoyaBaseBundle::class => ['all' => true],
     JMS\SerializerBundle\JMSSerializerBundle::class => ['all' => true],
     dsarhoya\DSYFilesBundle\dsarhoyaDSYFilesBundle::class => ['all' => true],
+    Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle::class => ['dev' => true, 'test' => true],
+    Liip\FunctionalTestBundle\LiipFunctionalTestBundle::class => ['dev' => true, 'test' => true],
 ];

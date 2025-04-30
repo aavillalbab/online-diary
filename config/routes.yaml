@@ -1,7 +1,7 @@
 admin:
   resource: '../src/Controller/Admin'
   type: annotation
-  prefix: /admin
+  prefix: /secured/admin
 
 api:
   resource: '../src/Controller/Api'

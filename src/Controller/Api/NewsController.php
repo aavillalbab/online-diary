@@ -38,4 +38,16 @@ class NewsController extends ApiAbstractController
 
         return $this->serializedResponse($newsList, ['news_list']);
     }
+
+    #[Route('/{id}', name: 'show', methods: ['GET'])]
+    public function show(int $id): Response
+    {
+        $news = $this->repository->find($id);
+        
+        if (!$news) {
+            throw $this->createNotFoundException('News not found');
+        }
+
+        return $this->serializedResponse($news, ['news_list']);
+    }
 }

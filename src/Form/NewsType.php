@@ -32,7 +32,7 @@ class NewsType extends AbstractType
                 'widget' => 'single_text',
             ])
             ->add('description', TextareaType::class, [
-                'label' => 'description',
+                'label' => 'Description',
             ])
             ->add('file', FileType::class, [
                 'label' => 'Imagen',

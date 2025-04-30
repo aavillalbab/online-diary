@@ -1,0 +1,7 @@
+{% macro newsImage(news, class = 'img-fluid rounded', style = '') %}
+    <img src="{{ news.imagePath ? news.imagePath : asset('images/no-image.jpg') }}"
+         class="{{ class }}" 
+         alt="{{ news.title }}"
+         style="{{ style }}"
+         onerror="this.onerror=null; this.src='{{ asset('images/no-image.jpg') }}';">
+{% endmacro %} 
