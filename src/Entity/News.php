@@ -7,12 +7,14 @@ use App\Repository\NewsRepository;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use dsarhoya\DSYFilesBundle\Interfaces\IFileEnabledEntity;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Table
  * @ORM\Entity(repositoryClass=NewsRepository::class)
  */
-class News
+class News implements IFileEnabledEntity
 {
     /**
      * @ORM\Id
@@ -40,7 +42,7 @@ class News
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private ?string $imagePath;
+    private ?string $imagePath = null;
 
     /**
      * @ORM\Column(type="boolean")
@@ -67,6 +69,11 @@ class News
      * @JMS\Groups({"r_news_category"})
      */
     private ?Category $category;
+
+    /**
+     * @var UploadedFile|null
+     */
+    private ?UploadedFile $file = null;
 
     public function getId(): ?int
     {
@@ -154,6 +161,41 @@ class News
     {
         $this->category = $category;
         return $this;
+    }
+
+    public function getFile(): ?UploadedFile
+    {
+        return $this->file;
+    }
+
+    public function setFile(?UploadedFile $file): self
+    {
+        $this->file = $file;
+        if ($file) {
+            $ext = ('bin' !== $file->guessExtension() && null !== $file->guessExtension()) ? $file->guessExtension() : $file->getClientOriginalExtension();
+            $this->imagePath = sprintf('news_%s.%s', md5(time()), $ext);
+        }
+        return $this;
+    }
+
+    public function getFileKey(): ?string
+    {
+        return $this->imagePath;
+    }
+
+    public function getFileProperties(): array
+    {
+        return [
+            'ACL' => 'public-read'
+        ];
+    }
+
+    /**
+     * @return string
+     */
+    public function getFilePath(): string
+    {
+        return 'news';
     }
 }
 

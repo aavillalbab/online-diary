@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class NewsType extends AbstractType
@@ -32,6 +33,11 @@ class NewsType extends AbstractType
             ])
             ->add('description', TextareaType::class, [
                 'label' => 'description',
+            ])
+            ->add('file', FileType::class, [
+                'label' => 'Imagen',
+                'required' => false,
+                'mapped' => false,
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Guardar',

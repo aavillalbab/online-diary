@@ -11,6 +11,7 @@
         <thead>
             <tr>
                 <th>Id</th>
+                <th>Imagen</th>
                 <th>Título</th>
                 <th>Categoría</th>
                 <th>Publicado</th>
@@ -21,6 +22,13 @@
             {% for news in news_list %}
                 <tr>
                     <td>{{ news.id }}</td>
+                    <td>
+                        {% if news.imagePath %}
+                            <img src="{{ fileUrl(news.imagePath) }}" alt="{{ news.title }}" style="max-width: 100px;">
+                        {% else %}
+                            Sin imagen
+                        {% endif %}
+                    </td>
                     <td>{{ news.title }}</td>
                     <td>{{ news.category.name }}</td>
                     <td>{{ news.publishedAt ? news.publishedAt|date('d/m/Y H:i') : '' }}</td>
@@ -33,7 +41,7 @@
                     </td>
                 </tr>
             {% else %}
-                <tr><td colspan="5">No hay noticias.</td></tr>
+                <tr><td colspan="6">No hay noticias.</td></tr>
             {% endfor %}
         </tbody>
     </table>

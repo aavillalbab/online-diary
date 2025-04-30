@@ -40,6 +40,13 @@ class NewsAdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->has('file')) {
+                $file = $form->get('file')->getData();
+                if ($file) {
+                    $news->setFile($file);
+                }
+            }
+            
             $this->em->persist($news);
             $this->em->flush();
             return $this->redirectToRoute('admin_news_index');
@@ -59,6 +66,13 @@ class NewsAdminController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            if ($form->has('file')) {
+                $file = $form->get('file')->getData();
+                if ($file) {
+                    $news->setFile($file);
+                }
+            }
+            
             $this->em->flush();
             return $this->redirectToRoute('admin_news_index');
         }
