@@ -75,6 +75,13 @@ class News implements IFileEnabledEntity
      */
     private ?UploadedFile $file = null;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     *
+     * @var string|null
+     */
+    private ?string $fileKey;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -171,16 +178,10 @@ class News implements IFileEnabledEntity
     public function setFile(?UploadedFile $file): self
     {
         $this->file = $file;
-        if ($file) {
-            $ext = ('bin' !== $file->guessExtension() && null !== $file->guessExtension()) ? $file->guessExtension() : $file->getClientOriginalExtension();
-            $this->imagePath = sprintf('news_%s.%s', md5(time()), $ext);
-        }
-        return $this;
-    }
+        $ext = ('bin' !== $file->guessExtension() && null !== $file->guessExtension()) ? $file->guessExtension() : $file->getClientOriginalExtension();
+        $this->setFileKey(sprintf('news_%s.%s', md5(time()), $ext));
 
-    public function getFileKey(): ?string
-    {
-        return $this->imagePath;
+        return $this;
     }
 
     public function getFileProperties(): array
@@ -190,12 +191,24 @@ class News implements IFileEnabledEntity
         ];
     }
 
-    /**
-     * @return string
-     */
     public function getFilePath(): string
     {
         return 'news';
     }
-}
 
+    public function getFileKey(): ?string
+    {
+        return !empty($this->fileKey) ? $this->fileKey : null;
+    }
+
+    public function setFileKey(string $fileKey): static
+    {
+        $this->fileKey = $fileKey;
+        return $this;
+    }
+
+    public function getPathAndKey(): string
+    {
+        return $this->getFilePath() . '/' . $this->getFileKey();
+    }
+}

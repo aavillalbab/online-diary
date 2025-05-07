@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Form;
 
 use App\Entity\News;
@@ -37,7 +38,8 @@ class NewsType extends AbstractType
             ->add('file', FileType::class, [
                 'label' => 'Imagen',
                 'required' => false,
-                'mapped' => false,
+                'is_image' => true,
+                'file_url_options' => ['signed' => true],
             ])
             ->add('save', SubmitType::class, [
                 'label' => 'Guardar',
