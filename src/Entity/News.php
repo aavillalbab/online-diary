@@ -16,6 +16,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
  */
 class News implements IFileEnabledEntity
 {
+    const UPLOAD_PATH = "news_image";
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -179,7 +181,7 @@ class News implements IFileEnabledEntity
     {
         $this->file = $file;
         $ext = ('bin' !== $file->guessExtension() && null !== $file->guessExtension()) ? $file->guessExtension() : $file->getClientOriginalExtension();
-        $this->setFileKey(sprintf('news_%s.%s', md5(time()), $ext));
+        $this->setFileKey(sprintf('%s/news_%s.%s', self::UPLOAD_PATH, md5(time()), $ext));
 
         return $this;
     }
@@ -207,8 +209,8 @@ class News implements IFileEnabledEntity
         return $this;
     }
 
-    public function getPathAndKey(): string
+    public function getFilePathAndKey()
     {
-        return $this->getFilePath() . '/' . $this->getFileKey();
+        return $this->getFileKey();
     }
 }
