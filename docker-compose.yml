@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  app:
+    container_name: ${COMPOSE_PROJECT_NAME}.app
+    build:
+      context: .
+      dockerfile: docker/app/Dockerfile.prod
+    volumes:
+      - .:/app
+      - ./docker/app/dsy.ini:/usr/local/etc/php/conf.d/dsy.ini
+      - ./docker/php/dsycron:/dsycron
+    working_dir: /app
+    environment:
+      - AWS_SUPPRESS_PHP_DEPRECATION_WARNING=true
+    cap_add:
+      - SYS_PTRACE
+
+  nginx:
+    container_name: ${COMPOSE_PROJECT_NAME}.nginx
+    build:
+      context: .
+      dockerfile: docker/nginx/Dockerfile.prod
+    volumes:
+      - ./public:/app/public
+      - ./docker/logs/nginx:/app/docker/logs/nginx
+    ports:
+      - "${COMPOSE_PORT}:80"
+    depends_on:
+      - app
+
+#  database:
+#    image: mysql:8.0
+#    container_name: ${COMPOSE_PROJECT_NAME:-symfony}.database
+#    environment:
+#      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD:-root}
+#      - MYSQL_DATABASE=${MYSQL_DATABASE:-symfony}
+#      - MYSQL_USER=${MYSQL_USER:-symfony}
+#      - MYSQL_PASSWORD=${MYSQL_PASSWORD:-symfony}
+#    volumes:
+#      - mysql_data:/var/lib/mysql
+#    ports:
+#      - "${MYSQL_PORT:-3306}:3306"
+
+volumes:
+  mysql_data:
