@@ -31,7 +31,7 @@ class NewsImagePathSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $fileKey = $news->getFileKey();
+        $fileKey = $news->getFilePathAndKey();
 
         if ($fileKey) {
             $imageUrl = $this->filesService->getObjectUrl($fileKey);

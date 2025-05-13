@@ -211,6 +211,6 @@ class News implements IFileEnabledEntity
 
     public function getFilePathAndKey()
     {
-        return $this->getFileKey();
+        return "news/" . $this->getFileKey();
     }
 }
